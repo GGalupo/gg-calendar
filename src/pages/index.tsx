@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { Heading } from "@ggalupo-ui/react";
 
 export default function Home() {
   return (
@@ -7,7 +8,7 @@ export default function Home() {
         <title>GG Call</title>
       </Head>
 
-      <h1>Hello world!</h1>
+      <Heading as="h1">Hello world!</Heading>
     </>
   );
 }
