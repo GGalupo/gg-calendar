@@ -1,6 +1,8 @@
 import { Button, Heading, MultiStep, Text, TextInput } from '@ggalupo-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/router'
 import { ArrowRight } from 'phosphor-react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -18,13 +20,25 @@ const registerFormSchema = z.object({
 type RegisterFormData = z.infer<typeof registerFormSchema>
 
 export default function Register() {
+  const { query } = useRouter()
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerFormSchema),
+    defaultValues: {
+      username: '',
+      name: '',
+    },
   })
+
+  useEffect(() => {
+    if (query.username) {
+      setValue('username', query.username.toString())
+    }
+  }, [query.username, setValue])
 
   const handleRegister = async (data: RegisterFormData) => {
     await new Promise((resolve) => setTimeout(resolve, 1500))

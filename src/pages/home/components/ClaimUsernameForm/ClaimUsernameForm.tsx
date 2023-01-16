@@ -2,6 +2,7 @@ import { Button, TextInput, Text } from '@ggalupo-ui/react'
 import { ArrowRight } from 'phosphor-react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { useRouter } from 'next/router'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { Form, FormAnnotation } from './styles'
@@ -17,6 +18,8 @@ const claimUsernameFormSchema = z.object({
 type ClaimUsernameFormData = z.infer<typeof claimUsernameFormSchema>
 
 export const ClaimUsernameForm = () => {
+  const router = useRouter()
+
   const {
     register,
     handleSubmit,
@@ -25,8 +28,10 @@ export const ClaimUsernameForm = () => {
     resolver: zodResolver(claimUsernameFormSchema),
   })
 
-  const handleClaimUsername = (data: ClaimUsernameFormData) => {
-    console.log(data)
+  const handleClaimUsername = async (data: ClaimUsernameFormData) => {
+    const { username } = data
+
+    router.push(`/register?username=${username}`)
   }
 
   return (
