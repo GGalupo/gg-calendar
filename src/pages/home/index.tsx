@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { Heading, Text } from '@ggalupo-ui/react'
 import Image from 'next/image'
 
+import { ClaimUsernameForm } from './components'
 import homeImage from '../../assets/home-page.png'
 import { Container, Hero, Preview } from './styles'
 
@@ -21,6 +22,7 @@ export default function Home() {
             Connect your calendar and allow people to schedule an appointment
             with you.
           </Text>
+          <ClaimUsernameForm />
         </Hero>
         <Preview>
           <Image
