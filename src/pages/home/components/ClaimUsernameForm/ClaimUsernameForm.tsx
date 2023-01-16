@@ -34,7 +34,7 @@ export const ClaimUsernameForm = () => {
       <Form onSubmit={handleSubmit(handleClaimUsername)} as="form">
         <TextInput
           size="sm"
-          placeholder="Type the username"
+          placeholder="Your username"
           {...register('username')}
         />
         <Button size="sm" type="submit">
