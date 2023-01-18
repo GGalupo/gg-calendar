@@ -1,10 +1,13 @@
 import { Button, Heading, MultiStep, Text, TextInput } from '@ggalupo-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { AxiosError } from 'axios'
 import { useRouter } from 'next/router'
 import { ArrowRight } from 'phosphor-react'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+
+import { api } from '../../lib'
 
 import { Container, Form, FormError, Header } from './styles'
 
@@ -41,8 +44,19 @@ export default function Register() {
   }, [query.username, setValue])
 
   const handleRegister = async (data: RegisterFormData) => {
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-    console.log(data)
+    try {
+      await api.post('/users', {
+        name: data.name,
+        username: data.username,
+      })
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.data?.message) {
+        alert(e.response.data.message)
+        return
+      }
+
+      console.error(e)
+    }
   }
 
   return (
