@@ -17,13 +17,13 @@ export const authOptions: NextAuthOptions = {
 
   callbacks: {
     async signIn({ account }) {
-      if (
-        !account?.scope?.includes('https://www.googleapis.com/auth/calendar')
-      ) {
-        return '/register/connect-calendar?error=permissions'
-      }
+      const hasCalendarPermission = account?.scope?.includes(
+        'https://www.googleapis.com/auth/calendar',
+      )
 
-      return true
+      return hasCalendarPermission
+        ? true
+        : '/register/connect-calendar?error=permissions'
     },
   },
 }
