@@ -23,7 +23,7 @@ const registerFormSchema = z.object({
 type RegisterFormData = z.infer<typeof registerFormSchema>
 
 export default function Register() {
-  const { query } = useRouter()
+  const { query, push } = useRouter()
   const {
     register,
     handleSubmit,
@@ -49,6 +49,8 @@ export default function Register() {
         name: data.name,
         username: data.username,
       })
+
+      await push('/register/connect-calendar')
     } catch (e) {
       if (e instanceof AxiosError && e.response?.data?.message) {
         alert(e.response.data.message)
