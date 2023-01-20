@@ -11,6 +11,7 @@ import { ArrowRight } from 'phosphor-react'
 import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { api } from '../../../lib'
 import { getWeekDays, convertTimeStringToMinutes } from '../../../utils'
 import { Container, Header } from '../styles'
 
@@ -91,19 +92,11 @@ export default function TimeIntervals() {
 
   const handleSetTimeIntervals = async (data: any) => {
     // WAITING RHF LIB ISSUE FIX
-    const formData = data as TimeIntervalsFormOutput
+    const { intervals } = data as TimeIntervalsFormOutput
     try {
-      await new Promise((resolve, reject) => {
-        setTimeout(() => {
-          if (Math.random() > 0.5) {
-            resolve('Resolved')
-          } else {
-            reject(new Error('rejected'))
-          }
-        }, 1500)
+      await api.post('/users/time-intervals', {
+        intervals,
       })
-
-      console.log(formData)
     } catch (e) {
       console.log(e)
     }
