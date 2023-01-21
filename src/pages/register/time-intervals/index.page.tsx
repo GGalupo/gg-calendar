@@ -124,6 +124,7 @@ export default function TimeIntervals() {
                   control={control}
                   render={({ field: { onChange, value } }) => (
                     <Checkbox
+                      id={field.id}
                       onCheckedChange={(checked) => {
                         onChange(checked === true)
                       }}
@@ -131,7 +132,9 @@ export default function TimeIntervals() {
                     />
                   )}
                 />
-                <Text>{weekDays[field.weekDay]}</Text>
+                <Text as="label" htmlFor={field.id}>
+                  {weekDays[field.weekDay]}
+                </Text>
               </IntervalDay>
               <IntervalInputs>
                 <TextInput
