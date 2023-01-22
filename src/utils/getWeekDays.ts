@@ -1,7 +1,15 @@
-const capitalizeWeekDay = (weekDay: string): string =>
-  weekDay[0].toUpperCase() + weekDay.substring(1)
+interface GetWeekDaysParams {
+  short?: boolean
+}
 
-export const getWeekDays = () => {
+const capitalizeWeekDay = (weekDay: string, short: boolean): string => {
+  if (short) {
+    return weekDay.substring(0, 3).toUpperCase()
+  }
+  return weekDay[0].toUpperCase() + weekDay.substring(1)
+}
+
+export const getWeekDays = ({ short = false }: GetWeekDaysParams) => {
   const formatter = new Intl.DateTimeFormat('en-US', {
     weekday: 'long',
   })
@@ -10,5 +18,5 @@ export const getWeekDays = () => {
 
   return Array.from({ length: 7 }, (_el, i) =>
     formatter.format(weekStartedOnSunday(i)),
-  ).map(capitalizeWeekDay)
+  ).map((el) => capitalizeWeekDay(el, short))
 }
