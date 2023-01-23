@@ -9,7 +9,6 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { type GetServerSideProps } from 'next'
-// eslint-disable-next-line
 import { unstable_getServerSession } from 'next-auth'
 import { useSession } from 'next-auth/react'
 import { ArrowRight } from 'phosphor-react'

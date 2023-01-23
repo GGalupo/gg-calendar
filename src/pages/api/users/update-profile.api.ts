@@ -1,5 +1,4 @@
 import { type NextApiRequest, type NextApiResponse } from 'next'
-// eslint-disable-next-line
 import { unstable_getServerSession } from 'next-auth'
 import { z } from 'zod'
 
