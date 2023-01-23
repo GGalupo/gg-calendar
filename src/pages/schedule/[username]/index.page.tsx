@@ -1,7 +1,6 @@
 import { GetStaticPaths, type GetStaticProps } from 'next'
 import { Avatar, Heading, Text } from '@ggalupo-ui/react'
 
-import { Calendar } from '../../../components'
 import { prisma } from '../../../lib/prisma'
 
 import { Container, UserHeader } from './styles'
@@ -26,7 +25,6 @@ export default function Schedule({
         <Text>{bio}</Text>
       </UserHeader>
 
-      <Calendar />
       <ScheduleForm />
     </Container>
   )
