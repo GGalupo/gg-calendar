@@ -1,8 +1,14 @@
+import { useState } from 'react'
+
 import { CalendarStep } from './CalendarStep'
 import { ConfirmationStep } from './ConfirmationStep'
 
 export const ScheduleForm = () => {
-  const isCalendarStep = true
+  const [selectedDateTime, setSelectedDateTime] = useState<Date | null>(null)
 
-  return isCalendarStep ? <CalendarStep /> : <ConfirmationStep />
+  if (selectedDateTime) {
+    return <ConfirmationStep scheduledDateTime={selectedDateTime} />
+  }
+
+  return <CalendarStep onDateTimeSelection={setSelectedDateTime} />
 }

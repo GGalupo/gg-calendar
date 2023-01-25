@@ -5,6 +5,7 @@ import dayjs from 'dayjs'
 
 import { Calendar } from '../../../../../components'
 import { api } from '../../../../../lib'
+import { formatTimeToAMPM } from '../../../../../utils'
 
 import {
   Container,
@@ -19,7 +20,11 @@ type Availability = {
   availableTimes: number[]
 }
 
-export const CalendarStep = () => {
+type CalendarStepProps = {
+  onDateTimeSelection: (date: Date) => void
+}
+
+export const CalendarStep = ({ onDateTimeSelection }: CalendarStepProps) => {
   const router = useRouter()
   const username = String(router.query.username)
 
@@ -28,12 +33,6 @@ export const CalendarStep = () => {
   const hasSelectedDay = !!selectedDate
   const weekDay = selectedDate ? dayjs(selectedDate).format('dddd') : null
   const monthYear = selectedDate ? dayjs(selectedDate).format('DD MMMM') : null
-
-  const formattedTimePickerHour = (hour: number) => {
-    const isAM = hour <= 12
-
-    return `${String(isAM ? hour : hour - 12)}:00 ${isAM ? 'AM' : 'PM'}`
-  }
 
   const selectedDateWithoutTime = selectedDate
     ? dayjs(selectedDate).format('YYYY-MM-DD')
@@ -55,6 +54,15 @@ export const CalendarStep = () => {
     },
   )
 
+  const handleSelectTime = (hour: number) => {
+    const dateWithTime = dayjs(selectedDate)
+      .set('hour', hour)
+      .startOf('hour')
+      .toDate()
+
+    onDateTimeSelection(dateWithTime)
+  }
+
   return (
     <Container isTimePickerOpen={hasSelectedDay}>
       <Calendar
@@ -73,9 +81,10 @@ export const CalendarStep = () => {
             {availability?.possibleTimes.map((hour) => (
               <TimePickerItem
                 key={hour}
+                onClick={() => handleSelectTime(hour)}
                 disabled={!availability.availableTimes.includes(hour)}
               >
-                {formattedTimePickerHour(hour)}
+                {formatTimeToAMPM(hour)}
               </TimePickerItem>
             ))}
           </TimePickerList>
