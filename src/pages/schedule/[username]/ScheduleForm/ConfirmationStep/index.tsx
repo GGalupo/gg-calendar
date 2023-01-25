@@ -1,5 +1,6 @@
 import { Button, Text, TextArea, TextInput } from '@ggalupo-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
+import dayjs from 'dayjs'
 import { CalendarBlank, Clock } from 'phosphor-react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -14,7 +15,15 @@ const confirmationFormSchema = z.object({
 
 type ConfirmationFormData = z.infer<typeof confirmationFormSchema>
 
-export const ConfirmationStep = () => {
+type ConfirmationStepProps = {
+  scheduledDateTime: Date
+  onCancelConfirmation: () => void
+}
+
+export const ConfirmationStep = ({
+  scheduledDateTime,
+  onCancelConfirmation,
+}: ConfirmationStepProps) => {
   const {
     register,
     handleSubmit,
@@ -27,16 +36,20 @@ export const ConfirmationStep = () => {
     console.log(data)
   }
 
+  const formattedScheduledDate =
+    dayjs(scheduledDateTime).format('MMMM DD, YYYY')
+  const formattedScheduledTime = dayjs(scheduledDateTime).format('hh:mm A')
+
   return (
     <ConfirmationForm as="form" onSubmit={handleSubmit(handleScheduling)}>
       <FormHeader>
         <Text>
           <CalendarBlank />
-          January 23, 2023
+          {formattedScheduledDate}
         </Text>
         <Text>
           <Clock />
-          06:00 PM
+          {formattedScheduledTime}
         </Text>
       </FormHeader>
 
@@ -64,7 +77,7 @@ export const ConfirmationStep = () => {
       </label>
 
       <FormActions>
-        <Button type="button" variant="tertiary">
+        <Button type="button" onClick={onCancelConfirmation} variant="tertiary">
           Cancel
         </Button>
         <Button type="submit" disabled={isSubmitting}>
