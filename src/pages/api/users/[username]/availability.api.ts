@@ -48,7 +48,7 @@ export default async function handler(
 
   const { start_time_in_minutes, end_time_in_minutes } = userAvailability
 
-  //   SCHEDULINGS ARE FROM HOUR TO HOUR
+  // CURRENT BUSINESS RULE: SCHEDULINGS ARE FROM HOUR TO HOUR
   const startHour = start_time_in_minutes / 60
   const endHour = end_time_in_minutes / 60
 
@@ -75,7 +75,11 @@ export default async function handler(
       (notAvailableTime) => notAvailableTime.date.getHours() === possibleTime,
     )
 
-    return !isAlreadyScheduled
+    const isPastTime = referenceDate
+      .set('hour', possibleTime)
+      .isBefore(new Date())
+
+    return !isAlreadyScheduled && !isPastTime
   })
 
   return res.json({ possibleTimes, availableTimes })
