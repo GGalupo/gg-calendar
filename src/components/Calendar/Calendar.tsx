@@ -25,6 +25,7 @@ type CalendarWeek = {
 
 type BlockedDates = {
   blockedWeekDays: number[]
+  fullScheduledDates: number[]
 }
 
 type CalendarProps = {
@@ -52,7 +53,7 @@ export const Calendar = ({
       const response = await api.get(`/users/${username}/blocked-dates`, {
         params: {
           year: currentDate.get('year'),
-          month: currentDate.get('month'),
+          month: String(currentDate.get('month') + 1).padStart(2, '0'),
         },
       })
 
@@ -76,6 +77,9 @@ export const Calendar = ({
   const currentYearFormatted = currentDate.format('YYYY')
 
   const calendarWeeks = useMemo(() => {
+    if (!blockedDates) {
+      return []
+    }
     const daysInMonth = currentDate.daysInMonth()
 
     const daysInMonthArray = Array.from({ length: daysInMonth }, (_el, i) =>
@@ -103,14 +107,18 @@ export const Calendar = ({
         disabled: true,
       })),
       ...daysInMonthArray.map((date) => {
-        const dayHasAlreadyPassed = date.endOf('day').isBefore(new Date())
-        const dayIsBlockedByUser = !!blockedDates?.blockedWeekDays.includes(
+        const dateHasAlreadyPassed = date.endOf('day').isBefore(new Date())
+        const dayIsBlockedByUser = blockedDates.blockedWeekDays.includes(
           date.get('day'),
+        )
+        const fullScheduledDates = blockedDates.fullScheduledDates.includes(
+          date.get('date'),
         )
 
         return {
           date,
-          disabled: dayHasAlreadyPassed || dayIsBlockedByUser,
+          disabled:
+            dateHasAlreadyPassed || dayIsBlockedByUser || fullScheduledDates,
         }
       }),
       ...nextMonthFirstDaysArray.map((date) => ({
