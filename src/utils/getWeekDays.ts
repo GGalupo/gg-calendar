@@ -9,7 +9,7 @@ const capitalizeWeekDay = (weekDay: string, short: boolean): string => {
   return weekDay[0].toUpperCase() + weekDay.substring(1)
 }
 
-export const getWeekDays = ({ short = false }: GetWeekDaysParams) => {
+export const getWeekDays = ({ short = false }: GetWeekDaysParams = {}) => {
   const formatter = new Intl.DateTimeFormat('en-US', {
     weekday: 'long',
   })
