@@ -1,9 +1,12 @@
 import { Button, Text, TextArea, TextInput } from '@ggalupo-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import dayjs from 'dayjs'
+import { useRouter } from 'next/router'
 import { CalendarBlank, Clock } from 'phosphor-react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+
+import { api } from '../../../../../lib'
 
 import { ConfirmationForm, FormActions, FormError, FormHeader } from './styles'
 
@@ -24,6 +27,9 @@ export const ConfirmationStep = ({
   scheduledDateTime,
   onCancelConfirmation,
 }: ConfirmationStepProps) => {
+  const router = useRouter()
+  const username = String(router.query.username)
+
   const {
     register,
     handleSubmit,
@@ -32,8 +38,21 @@ export const ConfirmationStep = ({
     resolver: zodResolver(confirmationFormSchema),
   })
 
-  const handleScheduling = (data: ConfirmationFormData) => {
-    console.log(data)
+  const handleScheduling = async (data: ConfirmationFormData) => {
+    const { name, email, observations } = data
+
+    try {
+      await api.post(`/users/${username}/schedule`, {
+        name,
+        email,
+        observations,
+        date: scheduledDateTime,
+      })
+
+      onCancelConfirmation()
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   const formattedScheduledDate =
