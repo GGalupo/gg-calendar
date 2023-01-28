@@ -1,5 +1,6 @@
 import { Button, Heading, MultiStep, Text } from '@ggalupo-ui/react'
 import { signIn, useSession } from 'next-auth/react'
+import { NextSeo } from 'next-seo'
 import { useRouter } from 'next/router'
 import { ArrowRight, CalendarPlus, Check } from 'phosphor-react'
 
@@ -22,48 +23,56 @@ export default function ConnectCalendar() {
   }
 
   return (
-    <Container>
-      <Header>
-        <Heading as="strong">Connect your calendar!</Heading>
-        <Text>
-          Connect yout calendar to automatically check the busy hours and new
-          events as soon as they&apos;re scheduled.
-        </Text>
+    <>
+      <NextSeo title="Connect yout Google Calendar | GG Call" noindex />
 
-        <MultiStep size={4} currentStep={2} />
-      </Header>
+      <Container>
+        <Header>
+          <Heading as="strong">Connect your calendar!</Heading>
+          <Text>
+            Connect yout calendar to automatically check the busy hours and new
+            events as soon as they&apos;re scheduled.
+          </Text>
 
-      <ConnectBox>
-        <ConnectItem>
-          <Text>Google Calendar</Text>
-          {session ? (
-            <ConnectedChip>
-              <Text size="sm">Connected</Text>
-              <Check />
-            </ConnectedChip>
-          ) : (
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={handleCalendarConnection}
-            >
-              <CalendarPlus />
-              Connect
-            </Button>
+          <MultiStep size={4} currentStep={2} />
+        </Header>
+
+        <ConnectBox>
+          <ConnectItem>
+            <Text>Google Calendar</Text>
+            {session ? (
+              <ConnectedChip>
+                <Text size="sm">Connected</Text>
+                <Check />
+              </ConnectedChip>
+            ) : (
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={handleCalendarConnection}
+              >
+                <CalendarPlus />
+                Connect
+              </Button>
+            )}
+          </ConnectItem>
+
+          {hasAuthError && (
+            <AuthError size="sm">
+              An error occured while trying to connect to Google. Check if
+              you&apos;ve given permissions to access Google Calendar.
+            </AuthError>
           )}
-        </ConnectItem>
-
-        {hasAuthError && (
-          <AuthError size="sm">
-            An error occured while trying to connect to Google. Check if
-            you&apos;ve given permissions to access Google Calendar.
-          </AuthError>
-        )}
-        <Button type="submit" disabled={!session} onClick={handleGoToNextStep}>
-          Next step
-          <ArrowRight />
-        </Button>
-      </ConnectBox>
-    </Container>
+          <Button
+            type="submit"
+            disabled={!session}
+            onClick={handleGoToNextStep}
+          >
+            Next step
+            <ArrowRight />
+          </Button>
+        </ConnectBox>
+      </Container>
+    </>
   )
 }

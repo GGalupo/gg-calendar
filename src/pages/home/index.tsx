@@ -1,6 +1,6 @@
-import Head from 'next/head'
 import { Heading, Text } from '@ggalupo-ui/react'
 import Image from 'next/image'
+import { NextSeo } from 'next-seo'
 
 import { ClaimUsernameForm } from './components'
 import homeImage from '../../assets/home-page.png'
@@ -9,9 +9,10 @@ import { Container, Hero, Preview } from './styles'
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>GG Call</title>
-      </Head>
+      <NextSeo
+        title="Hassle-free scheduling | GG Call"
+        description="Connect your calendar and allow people to schedule an appointment with you."
+      />
 
       <Container>
         <Hero>

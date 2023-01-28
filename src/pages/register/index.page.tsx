@@ -1,6 +1,7 @@
 import { Button, Heading, MultiStep, Text, TextInput } from '@ggalupo-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AxiosError } from 'axios'
+import { NextSeo } from 'next-seo'
 import { useRouter } from 'next/router'
 import { ArrowRight } from 'phosphor-react'
 import { useEffect } from 'react'
@@ -62,39 +63,43 @@ export default function Register() {
   }
 
   return (
-    <Container>
-      <Header>
-        <Heading as="strong">Welcome to GG Call!</Heading>
-        <Text>
-          We need some info to create your profile! Don&apos;t worry, you can
-          always edit it later!
-        </Text>
+    <>
+      <NextSeo title="Create an account | GG Call" />
 
-        <MultiStep size={4} currentStep={1} />
-      </Header>
+      <Container>
+        <Header>
+          <Heading as="strong">Welcome to GG Call!</Heading>
+          <Text>
+            We need some info to create your profile! Don&apos;t worry, you can
+            always edit it later!
+          </Text>
 
-      <Form as="form" onSubmit={handleSubmit(handleRegister)}>
-        <label>
-          <Text size="sm">Username</Text>
-          <TextInput placeholder="Your username" {...register('username')} />
-          {errors.username && (
-            <FormError size="sm">{errors.username.message}</FormError>
-          )}
-        </label>
+          <MultiStep size={4} currentStep={1} />
+        </Header>
 
-        <label>
-          <Text size="sm">Full name</Text>
-          <TextInput placeholder="Your name" {...register('name')} />
-          {errors.name && (
-            <FormError size="sm">{errors.name.message}</FormError>
-          )}
-        </label>
+        <Form as="form" onSubmit={handleSubmit(handleRegister)}>
+          <label>
+            <Text size="sm">Username</Text>
+            <TextInput placeholder="Your username" {...register('username')} />
+            {errors.username && (
+              <FormError size="sm">{errors.username.message}</FormError>
+            )}
+          </label>
 
-        <Button type="submit" disabled={isSubmitting}>
-          Next step
-          <ArrowRight />
-        </Button>
-      </Form>
-    </Container>
+          <label>
+            <Text size="sm">Full name</Text>
+            <TextInput placeholder="Your name" {...register('name')} />
+            {errors.name && (
+              <FormError size="sm">{errors.name.message}</FormError>
+            )}
+          </label>
+
+          <Button type="submit" disabled={isSubmitting}>
+            Next step
+            <ArrowRight />
+          </Button>
+        </Form>
+      </Container>
+    </>
   )
 }

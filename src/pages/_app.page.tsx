@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app'
 import { SessionProvider } from 'next-auth/react'
 import { QueryClientProvider } from '@tanstack/react-query'
+import { DefaultSeo } from 'next-seo'
 
 import { queryClient } from '../lib'
 import { globalStyles } from '../styles'
@@ -14,6 +15,14 @@ export default function App({
   return (
     <SessionProvider session={session}>
       <QueryClientProvider client={queryClient}>
+        <DefaultSeo
+          openGraph={{
+            type: 'website',
+            locale: 'en_IE',
+            url: 'https://www.url.ie/',
+            siteName: 'GG Call',
+          }}
+        />
         <Component {...pageProps} />
       </QueryClientProvider>
     </SessionProvider>

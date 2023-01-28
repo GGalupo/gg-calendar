@@ -1,5 +1,6 @@
 import { GetStaticPaths, type GetStaticProps } from 'next'
 import { Avatar, Heading, Text } from '@ggalupo-ui/react'
+import { NextSeo } from 'next-seo'
 
 import { prisma } from '../../../lib/prisma'
 
@@ -18,15 +19,19 @@ export default function Schedule({
   user: { name, bio, avatarUrl },
 }: ScheduleProps) {
   return (
-    <Container>
-      <UserHeader>
-        <Avatar src={avatarUrl} />
-        <Heading>{name}</Heading>
-        <Text>{bio}</Text>
-      </UserHeader>
+    <>
+      <NextSeo title={`Scheduling with ${name} | GG Call`} />
 
-      <ScheduleForm />
-    </Container>
+      <Container>
+        <UserHeader>
+          <Avatar src={avatarUrl} />
+          <Heading>{name}</Heading>
+          <Text>{bio}</Text>
+        </UserHeader>
+
+        <ScheduleForm />
+      </Container>
+    </>
   )
 }
 

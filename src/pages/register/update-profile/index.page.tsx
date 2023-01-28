@@ -14,6 +14,7 @@ import { useSession } from 'next-auth/react'
 import { ArrowRight } from 'phosphor-react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { NextSeo } from 'next-seo'
 
 import { buildNextAuthOptions } from '../../api/auth/[...nextauth].api'
 import { api } from '../../../lib'
@@ -55,35 +56,39 @@ export default function UpdateProfile() {
   }
 
   return (
-    <Container>
-      <Header>
-        <Heading as="strong">Welcome to GG Call!</Heading>
-        <Text>Last step! Let people know a bit more about yourself.</Text>
+    <>
+      <NextSeo title="Update your profile | GG Call" noindex />
 
-        <MultiStep size={4} currentStep={4} />
-      </Header>
+      <Container>
+        <Header>
+          <Heading as="strong">Welcome to GG Call!</Heading>
+          <Text>Last step! Let people know a bit more about yourself.</Text>
 
-      <ProfileBox as="form" onSubmit={handleSubmit(handleUpdateProfile)}>
-        <label>
-          <Text>Profile picture</Text>
-          <Avatar src={session?.user.avatar_url} alt={session?.user.name} />
-        </label>
+          <MultiStep size={4} currentStep={4} />
+        </Header>
 
-        <label>
-          <Text size="sm">About yourself</Text>
-          <TextArea {...register('bio')} />
-          <FormAnottation size="sm">
-            This will be shown on your profile page, and can be changed any time
-            you want.
-          </FormAnottation>
-        </label>
+        <ProfileBox as="form" onSubmit={handleSubmit(handleUpdateProfile)}>
+          <label>
+            <Text>Profile picture</Text>
+            <Avatar src={session?.user.avatar_url} alt={session?.user.name} />
+          </label>
 
-        <Button type="submit" disabled={isSubmitting}>
-          Finish register
-          <ArrowRight />
-        </Button>
-      </ProfileBox>
-    </Container>
+          <label>
+            <Text size="sm">About yourself</Text>
+            <TextArea {...register('bio')} />
+            <FormAnottation size="sm">
+              This will be shown on your profile page, and can be changed any
+              time you want.
+            </FormAnottation>
+          </label>
+
+          <Button type="submit" disabled={isSubmitting}>
+            Finish register
+            <ArrowRight />
+          </Button>
+        </ProfileBox>
+      </Container>
+    </>
   )
 }
 
