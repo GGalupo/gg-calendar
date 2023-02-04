@@ -22,7 +22,7 @@ export const AuthError = styled(Text, {
 })
 
 export const ConnectedChip = styled('div', {
-  border: '1px solid $ignite500',
+  border: '1px solid $grass500',
   padding: '$3',
   borderRadius: '$md',
   display: 'flex',

@@ -11,16 +11,16 @@ export default function Home() {
     <>
       <NextSeo
         title="Hassle-free scheduling | GG Call"
-        description="Connect your calendar and allow people to schedule an appointment with you."
+        description="Connect your Google calendar and allow people to schedule an appointment with you."
       />
 
       <Container>
         <Hero>
-          <Heading size="4xl" as="h1">
+          <Heading size="2xl" as="h1">
             Hassle-free scheduling
           </Heading>
-          <Text size="xl">
-            Connect your calendar and allow people to schedule an appointment
+          <Text size="lg">
+            Connect your Google calendar and allow people to create a scheduling
             with you.
           </Text>
           <ClaimUsernameForm />
