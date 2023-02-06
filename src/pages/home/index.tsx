@@ -1,12 +1,15 @@
 import { Heading, Text } from '@ggalupo-ui/react'
 import Image from 'next/image'
 import { NextSeo } from 'next-seo'
+import { useSession } from 'next-auth/react'
 
-import { ClaimUsernameForm } from './components'
+import { ClaimUsernameForm, WelcomeUser } from './components'
 import homeImage from '../../assets/home-page.png'
 import { Container, Hero, Preview } from './styles'
 
 export default function Home() {
+  const { data: session } = useSession()
+
   return (
     <>
       <NextSeo
@@ -23,7 +26,7 @@ export default function Home() {
             Connect your Google calendar and allow people to create a scheduling
             with you.
           </Text>
-          <ClaimUsernameForm />
+          {session ? <WelcomeUser /> : <ClaimUsernameForm />}
         </Hero>
         <Preview>
           <Image
