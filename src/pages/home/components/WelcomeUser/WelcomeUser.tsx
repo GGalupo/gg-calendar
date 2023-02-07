@@ -1,25 +1,31 @@
 import { Avatar, Text, Button } from '@ggalupo-ui/react'
-import { useSession } from 'next-auth/react'
+import { signOut } from 'next-auth/react'
 import { ArrowRight } from 'phosphor-react'
 
-import { Container } from './styles'
+import { Container, SignOutButton } from './styles'
 
-export const WelcomeUser = () => {
-  const { data: session } = useSession()
+interface WelcomeUserProps {
+  userInfo: {
+    name: string
+    avatarUrl: string
+  }
+}
 
+export const WelcomeUser = ({ userInfo }: WelcomeUserProps) => {
   return (
-    <Container>
-      <Avatar
-        size="lg"
-        src={session?.user.avatar_url}
-        alt={session?.user.name}
-      />
-      <div>
-        <Text size="lg">Welcome, {session?.user.name}!</Text>
-        <Button type="button">
-          Go to your calendar <ArrowRight />
-        </Button>
-      </div>
-    </Container>
+    <>
+      <Container>
+        <Avatar size="lg" src={userInfo.avatarUrl} alt={userInfo.name} />
+        <div>
+          <Text size="lg">Welcome, {userInfo.name}!</Text>
+          <Button type="button">
+            Go to your calendar <ArrowRight />
+          </Button>
+        </div>
+      </Container>
+      <SignOutButton variant="tertiary" onClick={() => signOut()}>
+        Sign out from my account
+      </SignOutButton>
+    </>
   )
 }

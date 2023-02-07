@@ -4,8 +4,9 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { useRouter } from 'next/router'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { signIn } from 'next-auth/react'
 
-import { Form } from './styles'
+import { Form, SignInButton } from './styles'
 
 const claimUsernameFormSchema = z.object({
   username: z
@@ -34,6 +35,10 @@ export const ClaimUsernameForm = () => {
     router.push(`/register?username=${username}`)
   }
 
+  const handleSignIn = async () => {
+    await signIn('google')
+  }
+
   return (
     <>
       <Form onSubmit={handleSubmit(handleClaimUsername)} as="form">
@@ -47,6 +52,10 @@ export const ClaimUsernameForm = () => {
           <ArrowRight />
         </Button>
       </Form>
+      <Text>
+        Already have an account?{' '}
+        <SignInButton onClick={handleSignIn}>Sign in</SignInButton>
+      </Text>
       {errors.username && (
         <Text size="sm" level="danger">
           {errors.username.message}

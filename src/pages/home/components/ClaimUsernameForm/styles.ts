@@ -11,3 +11,5 @@ export const Form = styled(Box, {
     gridTemplateColumns: '1fr',
   },
 })
+
+export const SignInButton = styled('button', {})
