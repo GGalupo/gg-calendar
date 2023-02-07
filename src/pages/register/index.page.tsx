@@ -10,7 +10,7 @@ import { z } from 'zod'
 
 import { api } from '../../lib'
 
-import { Container, Form, FormError, Header } from './styles'
+import { Container, Form, Header } from './styles'
 
 const registerFormSchema = z.object({
   username: z
@@ -82,7 +82,9 @@ export default function Register() {
             <Text size="sm">Username</Text>
             <TextInput placeholder="Your username" {...register('username')} />
             {errors.username && (
-              <FormError size="sm">{errors.username.message}</FormError>
+              <Text size="sm" level="danger">
+                {errors.username.message}
+              </Text>
             )}
           </label>
 
@@ -90,7 +92,9 @@ export default function Register() {
             <Text size="sm">Full name</Text>
             <TextInput placeholder="Your name" {...register('name')} />
             {errors.name && (
-              <FormError size="sm">{errors.name.message}</FormError>
+              <Text size="sm" level="danger">
+                {errors.name.message}
+              </Text>
             )}
           </label>
 

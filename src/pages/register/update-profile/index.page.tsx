@@ -70,7 +70,11 @@ export default function UpdateProfile() {
         <ProfileBox as="form" onSubmit={handleSubmit(handleUpdateProfile)}>
           <label>
             <Text>Profile picture</Text>
-            <Avatar src={session?.user.avatar_url} alt={session?.user.name} />
+            <Avatar
+              size="lg"
+              src={session?.user.avatar_url}
+              alt={session?.user.name}
+            />
           </label>
 
           <label>

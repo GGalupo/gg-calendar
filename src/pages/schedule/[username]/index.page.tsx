@@ -24,7 +24,7 @@ export default function Schedule({
 
       <Container>
         <UserHeader>
-          <Avatar src={avatarUrl} />
+          <Avatar size="lg" src={avatarUrl} />
           <Heading>{name}</Heading>
           <Text>{bio}</Text>
         </UserHeader>

@@ -43,9 +43,6 @@ export const Calendar = ({
 
   const currentYear = currentDate.get('year')
   const currentMonth = currentDate.get('month')
-  console.log('currentDate: ', currentDate)
-  console.log('currentYear: ', currentYear)
-  console.log('currentMonth: ', currentMonth)
 
   const { data: blockedDates } = useQuery<BlockedDates>(
     ['blocked-dates', currentYear, currentMonth],
