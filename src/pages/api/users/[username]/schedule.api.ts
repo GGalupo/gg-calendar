@@ -77,7 +77,7 @@ export default async function handler(
     calendarId: 'primary',
     conferenceDataVersion: 1,
     requestBody: {
-      summary: `GG Call: ${name}`,
+      summary: `GG Calendar: ${name}`,
       description: observations,
       start: {
         dateTime: schedulingDate.format(),

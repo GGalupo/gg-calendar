@@ -20,7 +20,7 @@ export default function Home({ userInfo }: HomeProps) {
   return (
     <>
       <NextSeo
-        title="Hassle-free scheduling | GG Call"
+        title="Hassle-free scheduling | GG Calendar"
         description="Connect your Google calendar and allow people to schedule an appointment with you."
       />
 

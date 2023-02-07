@@ -24,7 +24,7 @@ export default function ConnectCalendar() {
 
   return (
     <>
-      <NextSeo title="Connect yout Google Calendar | GG Call" noindex />
+      <NextSeo title="Connect yout Google Calendar | GG Calendar" noindex />
 
       <Container>
         <Header>

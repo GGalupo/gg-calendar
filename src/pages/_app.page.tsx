@@ -20,7 +20,7 @@ export default function App({
             type: 'website',
             locale: 'en_IE',
             url: 'https://www.url.ie/',
-            siteName: 'GG Call',
+            siteName: 'GG Calendar',
           }}
         />
         <Component {...pageProps} />
