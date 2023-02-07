@@ -9,7 +9,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 import { type GetServerSideProps } from 'next'
-import { unstable_getServerSession } from 'next-auth'
+import { getServerSession } from 'next-auth'
 import { useSession } from 'next-auth/react'
 import { ArrowRight } from 'phosphor-react'
 import { useForm } from 'react-hook-form'
@@ -57,11 +57,11 @@ export default function UpdateProfile() {
 
   return (
     <>
-      <NextSeo title="Update your profile | GG Call" noindex />
+      <NextSeo title="Update your profile | GG Calendar" noindex />
 
       <Container>
         <Header>
-          <Heading as="strong">Welcome to GG Call!</Heading>
+          <Heading as="strong">Welcome to GG Calendar!</Heading>
           <Text>Last step! Let people know a bit more about yourself.</Text>
 
           <MultiStep size={4} currentStep={4} />
@@ -97,7 +97,7 @@ export default function UpdateProfile() {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const session = await unstable_getServerSession(
+  const session = await getServerSession(
     req,
     res,
     buildNextAuthOptions(req, res),

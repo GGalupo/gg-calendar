@@ -2,7 +2,7 @@ import { Heading, Text } from '@ggalupo-ui/react'
 import Image from 'next/image'
 import { NextSeo } from 'next-seo'
 import { GetServerSideProps } from 'next'
-import { unstable_getServerSession } from 'next-auth'
+import { getServerSession } from 'next-auth'
 
 import { ClaimUsernameForm, WelcomeUser } from './home/components'
 import homeImage from '../assets/home-page.png'
@@ -20,7 +20,7 @@ export default function Home({ userInfo }: HomeProps) {
   return (
     <>
       <NextSeo
-        title="Hassle-free scheduling | GG Call"
+        title="Hassle-free scheduling | GG Calendar"
         description="Connect your Google calendar and allow people to schedule an appointment with you."
       />
 
@@ -54,7 +54,7 @@ export default function Home({ userInfo }: HomeProps) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const session = await unstable_getServerSession(
+  const session = await getServerSession(
     req,
     res,
     buildNextAuthOptions(req, res),

@@ -20,7 +20,7 @@ export default function Schedule({
 }: ScheduleProps) {
   return (
     <>
-      <NextSeo title={`Scheduling with ${name} | GG Call`} />
+      <NextSeo title={`Scheduling with ${name} | GG Calendar`} />
 
       <Container>
         <UserHeader>

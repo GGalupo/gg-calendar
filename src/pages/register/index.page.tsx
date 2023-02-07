@@ -64,11 +64,11 @@ export default function Register() {
 
   return (
     <>
-      <NextSeo title="Create an account | GG Call" />
+      <NextSeo title="Create account | GG Calendar" />
 
       <Container>
         <Header>
-          <Heading as="strong">Welcome to GG Call!</Heading>
+          <Heading as="strong">Welcome to GG Calendar!</Heading>
           <Text>
             We need some info to create your profile! Don&apos;t worry, you can
             always edit it later!

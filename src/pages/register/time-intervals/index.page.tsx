@@ -109,7 +109,7 @@ export default function TimeIntervals() {
 
   return (
     <>
-      <NextSeo title="Select your available times | GG Call" noindex />
+      <NextSeo title="Select your available times | GG Calendar" noindex />
 
       <Container>
         <Header>

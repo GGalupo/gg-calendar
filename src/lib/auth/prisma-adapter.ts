@@ -14,7 +14,9 @@ export function PrismaAdapter(
 ): Adapter {
   return {
     async createUser(user) {
-      const { '@gg-call:userId': userIdOnCookies } = parseCookies({ req })
+      const { '@gg-calendar:userId': userIdOnCookies } = parseCookies({
+        req,
+      })
 
       if (!userIdOnCookies) {
         throw new Error('User ID not found on cookies.')
@@ -31,7 +33,7 @@ export function PrismaAdapter(
         },
       })
 
-      destroyCookie({ res }, '@gg-call:userId', {
+      destroyCookie({ res }, '@gg-calendar:userId', {
         path: '/',
       })
 
