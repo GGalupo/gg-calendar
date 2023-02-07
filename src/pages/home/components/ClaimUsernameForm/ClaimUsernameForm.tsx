@@ -52,7 +52,7 @@ export const ClaimUsernameForm = () => {
           <ArrowRight />
         </Button>
       </Form>
-      <Text>
+      <Text size="sm">
         Already have an account?{' '}
         <SignInButton onClick={handleSignIn}>Sign in</SignInButton>
       </Text>

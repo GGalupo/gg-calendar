@@ -13,5 +13,10 @@ export const Container = styled(Box, {
 })
 
 export const SignOutButton = styled(Button, {
-  color: '$danger400 !important',
+  padding: '$0',
+  marginLeft: '$1',
+
+  '&:hover': {
+    color: '$danger400 !important',
+  },
 })

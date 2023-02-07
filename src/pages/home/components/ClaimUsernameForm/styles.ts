@@ -12,4 +12,15 @@ export const Form = styled(Box, {
   },
 })
 
-export const SignInButton = styled('button', {})
+export const SignInButton = styled('button', {
+  background: 'transparent',
+  border: 'none',
+  color: '$grass500',
+  fontWeight: '$bold',
+  cursor: 'pointer',
+  fontSize: '$sm',
+
+  '&:hover': {
+    textDecoration: 'underline',
+  },
+})
