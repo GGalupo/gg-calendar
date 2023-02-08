@@ -1,4 +1,4 @@
-import { Box, styled } from '@ggalupo-ui/react'
+import { Box, styled, Text } from '@ggalupo-ui/react'
 
 export const Form = styled(Box, {
   display: 'grid',
@@ -12,10 +12,15 @@ export const Form = styled(Box, {
   },
 })
 
+export const FormError = styled(Text, {
+  marginBottom: '$1',
+  fontWeight: '$medium',
+})
+
 export const SignInButton = styled('button', {
   background: 'transparent',
   border: 'none',
-  color: '$grass500',
+  color: '$grass300',
   fontWeight: '$bold',
   cursor: 'pointer',
   fontSize: '$sm',
