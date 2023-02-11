@@ -32,7 +32,7 @@ export const CalendarStep = ({ onDateTimeSelection }: CalendarStepProps) => {
 
   const hasSelectedDay = !!selectedDate
   const weekDay = selectedDate ? dayjs(selectedDate).format('dddd') : null
-  const monthYear = selectedDate ? dayjs(selectedDate).format('DD MMMM') : null
+  const monthYear = selectedDate ? dayjs(selectedDate).format('MMMM DD') : null
 
   const selectedDateWithoutTime = selectedDate
     ? dayjs(selectedDate).format('YYYY-MM-DD')
@@ -65,11 +65,7 @@ export const CalendarStep = ({ onDateTimeSelection }: CalendarStepProps) => {
 
   return (
     <Container isTimePickerOpen={hasSelectedDay}>
-      <Calendar
-        username={username}
-        selectedDate={selectedDate}
-        onDateSelected={setSelectedDate}
-      />
+      <Calendar username={username} onDateSelected={setSelectedDate} />
 
       {hasSelectedDay && (
         <TimePicker>

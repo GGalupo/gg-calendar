@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signIn } from 'next-auth/react'
 
-import { Form, SignInButton } from './styles'
+import { Form, FormError, SignInButton } from './styles'
 
 const claimUsernameFormSchema = z.object({
   username: z
@@ -52,15 +52,15 @@ export const ClaimUsernameForm = () => {
           <ArrowRight />
         </Button>
       </Form>
+      {errors.username && (
+        <FormError size="sm" level="danger">
+          {errors.username.message}
+        </FormError>
+      )}
       <Text size="sm">
-        Already have an account?{' '}
+        Already have your calendar?{' '}
         <SignInButton onClick={handleSignIn}>Sign in</SignInButton>
       </Text>
-      {errors.username && (
-        <Text size="sm" level="danger">
-          {errors.username.message}
-        </Text>
-      )}
     </>
   )
 }

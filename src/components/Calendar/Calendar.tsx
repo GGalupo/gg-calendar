@@ -29,16 +29,11 @@ type BlockedDates = {
 }
 
 type CalendarProps = {
-  selectedDate: Date | null
   username: string
   onDateSelected: (date: Date) => void
 }
 
-export const Calendar = ({
-  selectedDate,
-  username,
-  onDateSelected,
-}: CalendarProps) => {
+export const Calendar = ({ username, onDateSelected }: CalendarProps) => {
   const [currentDate, setCurrentDate] = useState(() => dayjs().set('date', 1))
 
   const currentYear = currentDate.get('year')
