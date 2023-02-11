@@ -1,7 +1,7 @@
 import { Box, Heading, styled, Text } from '@ggalupo-ui/react'
 
 export const Container = styled('div', {
-  maxWidth: 1180,
+  maxWidth: 980,
   padding: '$6 $4',
   margin: '$6 auto $4',
 })
