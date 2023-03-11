@@ -108,3 +108,9 @@ export const Scheduling = styled('div', {
     },
   },
 })
+
+export const BioLabel = styled(Text, {
+  display: 'block',
+  fontWeight: '$medium',
+  marginBottom: '$2',
+})
