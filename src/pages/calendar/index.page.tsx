@@ -25,6 +25,7 @@ import { prisma } from '../../lib/prisma'
 import { buildNextAuthOptions } from '../api/auth/[...nextauth].api'
 
 import {
+  Bio,
   BioLabel,
   CalendarContainer,
   Container,
@@ -98,7 +99,7 @@ export default function Calendar({
         <UserInfo>
           <Avatar size="lg" src={avatarUrl} />
           <Heading size="sm">{name}</Heading>
-          <Text>{userBio}</Text>
+          <Bio size="sm">{userBio}</Bio>
           <Modal
             open={isUpdateBioModalOpen}
             onOpenChange={() =>
