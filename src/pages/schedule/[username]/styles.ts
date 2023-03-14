@@ -20,3 +20,7 @@ export const UserHeader = styled('header', {
     color: '$gray200',
   },
 })
+
+export const Bio = styled(Text, {
+  whiteSpace: 'pre-line',
+})
