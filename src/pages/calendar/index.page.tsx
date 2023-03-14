@@ -57,6 +57,7 @@ export default function Calendar({
   const {
     register,
     handleSubmit,
+    reset,
     formState: { isDirty },
   } = useForm({
     defaultValues: {
@@ -78,6 +79,9 @@ export default function Calendar({
       })
 
       setUserBio(data.bio)
+      reset({
+        bio: data.bio,
+      })
       setIsUpdateBioModalOpen(false)
     } catch (e) {
       console.error(e)
