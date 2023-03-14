@@ -23,4 +23,5 @@ export const UserHeader = styled('header', {
 
 export const Bio = styled(Text, {
   whiteSpace: 'pre-line',
+  textAlign: 'center',
 })
