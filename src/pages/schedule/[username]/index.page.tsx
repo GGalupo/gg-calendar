@@ -1,10 +1,10 @@
 import { GetStaticPaths, type GetStaticProps } from 'next'
-import { Avatar, Heading, Text } from '@ggalupo-ui/react'
+import { Avatar, Heading } from '@ggalupo-ui/react'
 import { NextSeo } from 'next-seo'
 
 import { prisma } from '../../../lib/prisma'
 
-import { Container, UserHeader } from './styles'
+import { Bio, Container, UserHeader } from './styles'
 import { ScheduleForm } from './ScheduleForm'
 
 interface ScheduleProps {
@@ -26,7 +26,7 @@ export default function Schedule({
         <UserHeader>
           <Avatar size="lg" src={avatarUrl} />
           <Heading>{name}</Heading>
-          <Text>{bio}</Text>
+          <Bio>{bio}</Bio>
         </UserHeader>
 
         <ScheduleForm />

@@ -108,3 +108,13 @@ export const Scheduling = styled('div', {
     },
   },
 })
+
+export const Bio = styled(Text, {
+  whiteSpace: 'pre-line',
+})
+
+export const BioLabel = styled(Text, {
+  display: 'block',
+  fontWeight: '$medium',
+  marginBottom: '$2',
+})

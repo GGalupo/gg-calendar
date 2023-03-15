@@ -1,16 +1,32 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { type GetServerSideProps } from 'next'
-import { Avatar, Button, Heading, Text } from '@ggalupo-ui/react'
+import {
+  Avatar,
+  Button,
+  Heading,
+  Text,
+  Modal,
+  ModalActions,
+  ModalWrapper,
+  ModalHeader,
+  TextArea,
+} from '@ggalupo-ui/react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 import { NextSeo } from 'next-seo'
 import { getServerSession } from 'next-auth'
 import { Clock } from 'phosphor-react'
 import dayjs from 'dayjs'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 import { Calendar as CalendarComponent } from '../../components'
+import { api } from '../../lib'
 import { prisma } from '../../lib/prisma'
 import { buildNextAuthOptions } from '../api/auth/[...nextauth].api'
 
 import {
+  Bio,
+  BioLabel,
   CalendarContainer,
   Container,
   Scheduling,
@@ -27,13 +43,53 @@ interface CalendarProps {
   }
 }
 
+const updateBioSchema = z.object({
+  bio: z.string(),
+})
+type UpdateBioFormData = z.infer<typeof updateBioSchema>
+
 export default function Calendar({
   user: { username, name, bio, avatarUrl },
 }: CalendarProps) {
+  const [isUpdateBioModalOpen, setIsUpdateBioModalOpen] = useState(false)
+  const [isUpdatingBio, setIsUpdatingBio] = useState(false)
+  const [userBio, setUserBio] = useState(bio)
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isDirty },
+  } = useForm({
+    defaultValues: {
+      bio: useMemo(() => userBio, [userBio]),
+    },
+    resolver: zodResolver(updateBioSchema),
+  })
   const [selectedDate, setSelectedDate] = useState<Date>(new Date())
 
   const weekDay = selectedDate ? dayjs(selectedDate).format('dddd') : null
   const monthYear = selectedDate ? dayjs(selectedDate).format('MMMM DD') : null
+
+  const updateBio = async (data: UpdateBioFormData) => {
+    setIsUpdatingBio(true)
+
+    try {
+      await api.put('/users/update-profile', {
+        bio: data.bio,
+      })
+
+      setUserBio(data.bio)
+      reset({
+        bio: data.bio,
+      })
+      setIsUpdateBioModalOpen(false)
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setIsUpdatingBio(false)
+    }
+  }
 
   return (
     <>
@@ -43,8 +99,46 @@ export default function Calendar({
         <UserInfo>
           <Avatar size="lg" src={avatarUrl} />
           <Heading size="sm">{name}</Heading>
-          <Text>{bio}</Text>
-          <Button variant="tertiary">Change my bio</Button>
+          <Bio size="sm">{userBio}</Bio>
+          <Modal
+            open={isUpdateBioModalOpen}
+            onOpenChange={() =>
+              setIsUpdateBioModalOpen((prevState) => !prevState)
+            }
+          >
+            <Button
+              variant="tertiary"
+              onClick={() => setIsUpdateBioModalOpen(true)}
+            >
+              Change my bio
+            </Button>
+            <ModalWrapper>
+              <ModalHeader>Update your bio</ModalHeader>
+
+              <form aria-label="Update bio" onSubmit={handleSubmit(updateBio)}>
+                <BioLabel htmlFor="bio" size="sm" as="label">
+                  Bio
+                </BioLabel>
+                <TextArea
+                  id="bio"
+                  style={{ width: '100%' }}
+                  placeholder="Enter your new bio"
+                  {...register('bio')}
+                />
+                <ModalActions>
+                  <Button
+                    variant="tertiary"
+                    onClick={() => setIsUpdateBioModalOpen(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button disabled={isUpdatingBio || !isDirty}>
+                    Update bio
+                  </Button>
+                </ModalActions>
+              </form>
+            </ModalWrapper>
+          </Modal>
           <Button variant="secondary">Edit availability</Button>
         </UserInfo>
 
@@ -147,7 +241,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
     props: {
       user: {
         name: user.name,
-        bio: user.bio,
+        bio: user.bio ?? '',
         avatarUrl: user.avatar_url,
         username: user.username,
       },
