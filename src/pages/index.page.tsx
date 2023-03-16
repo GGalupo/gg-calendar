@@ -5,9 +5,9 @@ import { GetServerSideProps } from 'next'
 import { getServerSession } from 'next-auth'
 
 import { ClaimUsernameForm, WelcomeUser } from './home/components'
-import homeImage from '../assets/home-page.png'
 import { Container, Hero, Preview } from './home/styles'
 import { buildNextAuthOptions } from './api/auth/[...nextauth].api'
+import homeImage from '../assets/home-page.svg'
 
 type HomeProps = {
   userInfo?: {

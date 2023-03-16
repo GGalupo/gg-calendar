@@ -5,8 +5,8 @@ export const Container = styled('div', {
   alignItems: 'center',
   justifyContent: 'center',
   gap: '$5',
-  marginLeft: 'auto',
-  maxWidth: 'calc(100vw - (100vw - 1160px) / 2)',
+  margin: '0 auto',
+  maxWidth: '1360px',
   height: '100vh',
 
   '@media(min-width: 1200px)': {
@@ -38,10 +38,21 @@ export const Hero = styled('div', {
 
 export const Preview = styled('div', {
   display: 'none',
-  padding: '$8',
   overflow: 'hidden',
 
-  '@media(min-width: 900px)': {
+  img: {
+    width: '33rem',
+    height: '29rem',
+  },
+
+  '@media(min-width: 1000px)': {
     display: 'block',
+  },
+
+  '@media(min-width: 1200px)': {
+    img: {
+      width: '40rem',
+      height: '30rem',
+    },
   },
 })
