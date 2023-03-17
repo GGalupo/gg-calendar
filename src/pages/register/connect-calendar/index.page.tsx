@@ -13,9 +13,9 @@ export default function ConnectCalendar() {
   const router = useRouter()
 
   const hasAuthError = !!router.query.error
-
   const handleCalendarConnection = async () => {
-    await signIn('google')
+    const callbackUrl = `${process.env.NEXT_PUBLIC_GG_CALENDAR_URL}/register/connect-calendar`
+    await signIn('google', { callbackUrl })
   }
 
   const handleGoToNextStep = async () => {
@@ -30,8 +30,8 @@ export default function ConnectCalendar() {
         <Header>
           <Heading as="strong">Connect your calendar!</Heading>
           <Text>
-            Connect yout calendar to automatically check the busy hours and new
-            events as soon as they&apos;re scheduled.
+            Connect your calendar to show your availability and allow people to
+            schedule a call with you.
           </Text>
 
           <MultiStep size={4} currentStep={2} />
@@ -58,9 +58,11 @@ export default function ConnectCalendar() {
           </ConnectItem>
 
           {hasAuthError && (
-            <AuthError size="sm">
-              An error occured while trying to connect to Google. Check if
-              you&apos;ve given permissions to access Google Calendar.
+            <AuthError level="danger" size="sm">
+              An error occured while trying to connect to Google.
+              <br />
+              Connect again and check if you&apos;ve given permissions to access
+              Google Calendar.
             </AuthError>
           )}
           <Button
