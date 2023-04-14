@@ -5,9 +5,10 @@ import { GetServerSideProps } from 'next'
 import { getServerSession } from 'next-auth'
 
 import { ClaimUsernameForm, WelcomeUser } from './home/components'
-import { Container, Hero, Preview } from './home/styles'
+import { Container, Footer, Hero, Preview } from './home/styles'
 import { buildNextAuthOptions } from './api/auth/[...nextauth].api'
 import homeImage from '../assets/home-page.svg'
+import { Link } from '../components'
 
 type HomeProps = {
   userInfo?: {
@@ -49,6 +50,10 @@ export default function Home({ userInfo }: HomeProps) {
           />
         </Preview>
       </Container>
+
+      <Footer>
+        <Link href="/privacy-policy">Privacy policy</Link>
+      </Footer>
     </>
   )
 }
