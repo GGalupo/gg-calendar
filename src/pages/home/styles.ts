@@ -7,7 +7,7 @@ export const Container = styled('div', {
   gap: '$5',
   margin: '0 auto',
   maxWidth: '1360px',
-  height: '100vh',
+  height: 'calc(100vh - 3.5rem)',
 
   '@media(min-width: 1200px)': {
     gap: '$16',
@@ -55,4 +55,13 @@ export const Preview = styled('div', {
       height: '30rem',
     },
   },
+})
+
+export const Footer = styled('footer', {
+  height: '3.5rem',
+  maxWidth: '1360px',
+  margin: '0 auto',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 })
