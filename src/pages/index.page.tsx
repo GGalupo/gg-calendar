@@ -5,9 +5,10 @@ import { GetServerSideProps } from 'next'
 import { getServerSession } from 'next-auth'
 
 import { ClaimUsernameForm, WelcomeUser } from './home/components'
-import { Container, Footer, Hero, Preview } from './home/styles'
+import { Container, Header, Hero, Preview } from './home/styles'
 import { buildNextAuthOptions } from './api/auth/[...nextauth].api'
 import homeImage from '../assets/home-page.svg'
+import logoImg from '../assets/logo.png'
 import { Link } from '../components'
 
 type HomeProps = {
@@ -24,6 +25,11 @@ export default function Home({ userInfo }: HomeProps) {
         title="Hassle-free scheduling | GG Calendar"
         description="Connect your Google calendar and allow people to schedule an appointment with you."
       />
+
+      <Header>
+        <Image src={logoImg} alt="GG Calendar's logo" width={125} />
+        <Link href="/privacy-policy">Privacy policy</Link>
+      </Header>
 
       <Container>
         <Hero>
@@ -50,10 +56,6 @@ export default function Home({ userInfo }: HomeProps) {
           />
         </Preview>
       </Container>
-
-      <Footer>
-        <Link href="/privacy-policy">Privacy policy</Link>
-      </Footer>
     </>
   )
 }

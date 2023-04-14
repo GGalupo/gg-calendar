@@ -6,7 +6,7 @@ export const Link = styled(NextLink, {
   color: '$white',
   fontStyle: 'normal',
   fontFamily: '$default',
-  display: 'flex',
+  display: 'inline-flex',
   alignItems: 'center',
   gap: '$2',
   svg: {
